@@ -153,33 +153,3 @@ select R.rid, D.dName,D.dDescription
 from Rooms R join Soldiers S on R.rid = S.roomId
 join Duties D on D.did = S.dutyId
 order by R.rid, D.dName;
-
-
-
-
-
-create trigger LendingTrigger
-    after insert
-    on Lending
-begin
- update Lending
-     set EquipmentWeight = (select E.Weight from Equipment E where E.Id == EquipmentId)
-    where EquipmentId = new.EquipmentId;
-end;
-
-INSERT INTO Lending (SoldierId, EquipmentId) VALUES(1245,65757);
-
-create trigger RoomMembersNumTrigger
-    after insert
-    on Soldiers
-    when exists
-        (select *
-        from Rooms R join Soldiers S on R.rid = S.roomId
-        where R.rid == new.roomId
-        group by rid, maxSoldiers
-        having count() > maxSoldiers)
-begin
-    select raise( ROLLBACK ,'There is not enough space in this room');
-end;
-
-insert into Soldiers (slName, roomId) values ('aaa', 7432);

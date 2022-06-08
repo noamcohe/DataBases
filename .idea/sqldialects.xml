@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/LendingTrigger.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/Queries.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Triggers/LendingTrigger.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Triggers/RoomMembersNumTrigger.sql" dialect="SQLite" />
     <file url="file://$USER_HOME$/Downloads/main_Buildings.sql" dialect="SQLite" />
     <file url="file://$USER_HOME$/Downloads/main_Duties.sql" dialect="SQLite" />
     <file url="file://$USER_HOME$/Downloads/main_Equipment.sql" dialect="SQLite" />
