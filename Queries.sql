@@ -161,3 +161,6 @@ select E.Id,
        E.cost
 from Equipment E
 where cost = (select max(cost) from Equipment)
+
+
+-- (16) List of all the manufacturers that more than 40% from their products are not work

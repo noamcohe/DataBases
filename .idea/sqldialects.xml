@@ -4,17 +4,5 @@
     <file url="file://$PROJECT_DIR$/Queries.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/Triggers/LendingTrigger.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/Triggers/RoomMembersNumTrigger.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Buildings.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Duties.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Equipment.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Lending.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Manufacturer.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Rooms.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Soldiers.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_Vehicles.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_building_equipment.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_room_equipment.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_sqlite_master.sql" dialect="SQLite" />
-    <file url="file://$USER_HOME$/Downloads/main_sqlite_sequence.sql" dialect="SQLite" />
   </component>
 </project>
