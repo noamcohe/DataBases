@@ -153,3 +153,11 @@ select R.rid, D.dName,D.dDescription
 from Rooms R join Soldiers S on R.rid = S.roomId
 join Duties D on D.did = S.dutyId
 order by R.rid, D.dName;
+
+
+-- (15) The most expensive product
+select E.Id,
+       E.Name,
+       E.cost
+from Equipment E
+where cost = (select max(cost) from Equipment)
