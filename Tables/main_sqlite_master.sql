@@ -7,41 +7,24 @@ create table sqlite_master
     sql      text
 );
 
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Duties', 'Duties', 2, 'CREATE TABLE Duties(
-    did INT PRIMARY KEY ,
-    dName VARCHAR(25) NOT NULL ,
-    dDescription VARCHAR(100) NOT NULL
-)');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'sqlite_autoindex_Duties_1', 'Duties', 3, null);
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Rooms', 'Rooms', 6, 'CREATE TABLE Rooms(
-    rid INT PRIMARY KEY ,
-    rNumber INT NOT NULL ,
-    buildingId INT NOT NULL ,
-    size FLOAT NOT NULL ,
-    rDescription VARCHAR(100) NOT NULL , numOfSoldiers integer, maxSoldiers integer,
-
-    FOREIGN KEY (buildingId) REFERENCES Buildings(bid)
-)');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'sqlite_autoindex_Rooms_1', 'Rooms', 7, null);
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Vehicles', 'Vehicles', 8, 'CREATE TABLE Vehicles(
-    vid INT PRIMARY KEY ,
-    vType VARCHAR(40) NOT NULL ,
-    vModel VARCHAR(25) NOT NULL ,
-    buildingId INT NOT NULL ,
-    vDescription VARCHAR(100) NOT NULL , maxWight integer,
-
-    FOREIGN KEY (buildingId) REFERENCES Buildings(bid)
-)');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'sqlite_autoindex_Vehicles_1', 'Vehicles', 9, null);
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Manufacturer', 'Manufacturer', 12, 'CREATE TABLE Manufacturer
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Buildings', 'Buildings', 2, 'CREATE TABLE Buildings
 (
-    Id   integer  not null
-        constraint Manufacturer_pk
-            primary key autoincrement,
-    Name nvarchar not null
+    bid          INTEGER
+        primary key autoincrement,
+    bName        VARCHAR(25)  not null,
+    position     VARCHAR(40)  not null,
+    bDescription VARCHAR(100) not null
 )');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'sqlite_sequence', 'sqlite_sequence', 13, 'CREATE TABLE sqlite_sequence(name,seq)');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Equipment', 'Equipment', 14, 'CREATE TABLE "Equipment"
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'sqlite_sequence', 'sqlite_sequence', 3, 'CREATE TABLE sqlite_sequence(name,seq)');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Duties', 'Duties', 4, 'CREATE TABLE Duties
+(
+    did          INT
+        primary key,
+    dName        VARCHAR(25)  not null,
+    dDescription VARCHAR(100) not null
+)');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'sqlite_autoindex_Duties_1', 'Duties', 5, null);
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Equipment', 'Equipment', 6, 'CREATE TABLE Equipment
 (
     Id             integer not null
         constraint Equipment_pk
@@ -58,12 +41,12 @@ INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table',
     eDescription   VARCHAR,
     cost           float,
     onVehicleId    integer
-        constraint onVehicle
-            references Vehicles
-, area float)');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'Equipment_Id_uindex', 'Equipment', 10, 'CREATE UNIQUE INDEX Equipment_Id_uindex
+        references Vehicles,
+    area           float
+)');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'Equipment_Id_uindex', 'Equipment', 7, 'CREATE UNIQUE INDEX Equipment_Id_uindex
     on Equipment (Id)');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Lending', 'Lending', 15, 'CREATE TABLE "Lending"
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Lending', 'Lending', 8, 'CREATE TABLE Lending
 (
     SoldierId       integer not null
         references Soldiers,
@@ -75,15 +58,27 @@ INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table',
             references Equipment (Weight),
     DateOfReturn    DATE
 )');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Buildings', 'Buildings', 17, 'CREATE TABLE "Buildings"
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Manufacturer', 'Manufacturer', 9, 'CREATE TABLE Manufacturer
 (
-    bid          INTEGER
-        primary key autoincrement,
-    bName        VARCHAR(25)  not null,
-    position     VARCHAR(40)  not null,
-    bDescription VARCHAR(100) not null
+    Id   integer  not null
+        constraint Manufacturer_pk
+            primary key autoincrement,
+    Name nvarchar not null
 )');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Soldiers', 'Soldiers', 4, 'CREATE TABLE "Soldiers"
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Rooms', 'Rooms', 10, 'CREATE TABLE Rooms
+(
+    rid           INT
+        primary key,
+    rNumber       INT          not null,
+    buildingId    INT          not null
+        references Buildings,
+    size          FLOAT        not null,
+    rDescription  VARCHAR(100) not null,
+    numOfSoldiers integer,
+    maxSoldiers   integer
+)');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'sqlite_autoindex_Rooms_1', 'Rooms', 11, null);
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Soldiers', 'Soldiers', 12, 'CREATE TABLE Soldiers
 (
     soldierId integer     not null
         constraint Soldiers_pk
@@ -95,10 +90,36 @@ INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table',
         references Rooms,
     equId     integer,
     dutyId    integer
-        constraint duty
-            references Duties
+        references Duties
 )');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('trigger', 'LendingTriger', 'Lending', 0, 'CREATE TRIGGER LendingTriger
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('table', 'Vehicles', 'Vehicles', 13, 'CREATE TABLE Vehicles
+(
+    vid          INT
+        primary key,
+    vType        VARCHAR(40)  not null,
+    vModel       VARCHAR(25)  not null,
+    buildingId   INT          not null
+        references Buildings,
+    vDescription VARCHAR(100) not null,
+    maxWight     integer
+)');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('index', 'sqlite_autoindex_Vehicles_1', 'Vehicles', 14, null);
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('view', 'room-equipment', 'room-equipment', 0, 'CREATE VIEW "room-equipment" as
+select *
+from Rooms R
+left outer join Soldiers S on R.rid = S.roomId
+left outer join Lending L on S.soldierId = L.SoldierId
+left outer join Equipment E on L.EquipmentId = E.Id
+where DateOfReturn is null');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('view', 'building-equipment', 'building-equipment', 0, 'CREATE VIEW "building-equipment" as
+select *
+from Buildings B
+left outer join Rooms R on B.bid = R.buildingId
+left outer join Soldiers S on R.rid = S.roomId
+left outer join Lending L on S.soldierId = L.SoldierId
+left outer join Equipment E on L.EquipmentId = E.Id
+where L.DateOfReturn is null');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('trigger', 'LendingTrigger', 'Lending', 0, 'CREATE TRIGGER LendingTrigger
     after insert
     on Lending
 begin
@@ -118,18 +139,37 @@ INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('trigger
 begin
     select raise( ROLLBACK ,''There is not enough space in this room'');
 end');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('view', 'room-equipment', 'room-equipment', 0, 'CREATE VIEW "room-equipment" as
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('view', 'work_soldiers_equipment', 'work_soldiers_equipment', 0, 'CREATE VIEW work_soldiers_equipment as
 select *
-from Rooms R
-left outer join Soldiers S on R.rid = S.roomId
-left outer join Lending L on S.soldierId = L.SoldierId
-left outer join Equipment E on L.EquipmentId = E.Id
-where DateOfReturn is null');
-INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('view', 'building-equipment', 'building-equipment', 0, 'CREATE VIEW "building-equipment" as
+from Soldiers S
+left outer join Lending L on S.SoldierId = L.SoldierId
+left outer join Equipment E on E.Id = L.EquipmentId
+where L.DateOfReturn is null and E.worker is TRUE');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('view', 'dwork-sol-equipment', 'dwork-sol-equipment', 0, 'CREATE VIEW "dwork-sol-equipment" as
 select *
-from Buildings B
-left outer join Rooms R on B.bid = R.buildingId
-left outer join Soldiers S on R.rid = S.roomId
-left outer join Lending L on S.soldierId = L.SoldierId
-left outer join Equipment E on L.EquipmentId = E.Id
-where L.DateOfReturn is null');
+from Soldiers S
+left outer join Lending L2 on S.SoldierId = L2.SoldierId
+left outer join Equipment E2 on E2.Id = L2.EquipmentId
+where L2.DateOfReturn is null and E2.worker is FALSE');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('trigger', 'ReturningTrigger', 'Lending', 0, 'CREATE TRIGGER ReturningTrigger
+    after insert
+    on Lending
+    for each row
+begin
+    select
+           case
+               when DateOfReturn < DateOfLending then
+                   raise(abort, ''invalid Returning date. this date is smaller than DateOfLending'')
+               end;
+end');
+INSERT INTO sqlite_master (type, name, tbl_name, rootpage, sql) VALUES ('trigger', 'MinStockTrigger', 'Equipment', 0, 'CREATE TRIGGER MinStockTrigger
+    after update
+    on Equipment
+    for each row
+begin
+    select
+           case
+               when MinOfStack > Amount then
+                   raise(abort, ''There is not enough from this product.'')
+               end;
+end');

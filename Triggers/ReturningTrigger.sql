@@ -1,5 +1,5 @@
-create trigger MinStockTrigger
-    after insert
+create trigger ReturningTrigger
+    before insert
     on Lending
     for each row
 begin
@@ -11,4 +11,4 @@ begin
 end;
 
 
-insert into Lending (DateOfLending, DateOfReturn) values ('')
+insert into Lending (EquipmentId, SoldierId, DateOfLending, DateOfReturn) values (93847, 102938475,DATE(1647043200000), DATE(1647907200000))

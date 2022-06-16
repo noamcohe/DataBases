@@ -2,7 +2,21 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/Queries.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Buildings.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Duties.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Equipment.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Lending.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Manufacturer.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Rooms.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Soldiers.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_Vehicles.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_sqlite_master.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Tables/main_sqlite_sequence.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/Triggers/LendingTrigger.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Triggers/MinStockTrigger.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Triggers/ReturningTrigger.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/Triggers/RoomMembersNumTrigger.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Views/main_dwork_sol_equipment.sql" dialect="SQLite" />
+    <file url="file://$PROJECT_DIR$/Views/main_work_soldiers_equipment.sql" dialect="SQLite" />
   </component>
 </project>

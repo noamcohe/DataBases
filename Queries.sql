@@ -1,20 +1,15 @@
 -- (1) Select all products that almost out of the stock
-select E.Id,
-       E.Name,
-       E.MinOfStack,
-       E.Amount,
-       M.Name as manufacturerName
-
+select E.Id, E.Name, E.MinOfStack, E.Amount, M.Name as manufacturerName
 from Equipment E
 join Manufacturer M on M.Id = E.ManufacturerId
 where Amount < E.MinOfStack;
 
 
--- (2) Select a list of all the products from an specific Manufacturer
-select E.Name
+-- (2) Select a list of all the products from a specific Manufacturer
+select E.Id, E.Name
 from Equipment E
 join Manufacturer M on M.Id = E.ManufacturerId
-where M.Name == :companuName;
+where M.Id == :companyId;
 
 
 -- (3) Select a list of all the products that a specific soldier ever took
@@ -23,14 +18,14 @@ select E.Id,
 from Equipment E
 join Lending L on E.Id = L.EquipmentId
 left join Soldiers S on S.SoldierId = L.SoldierId
-where S.sfName == :firstName and s.slName == :lastName;
+where S.soldierId == :soldierId;
 
 
--- (4) Select the weight of all the products that a specific soldier took
+-- (4) Select the weight of all the products that a specific soldier ever took
 select sum(Lending.EquipmentWeight)
 from Lending
 join Soldiers S on Lending.SoldierId = S.SoldierId
-where S.sfName == :firstName and S.slName == :lastName and DateOfReturn is null;
+where S.soldierId = :soldierId;
 
 
 -- (5) Select a list of all soldiers that have equipment more than 40% from their weight
@@ -56,21 +51,12 @@ having count(L.EquipmentId) > 9;
 
 
 -- (7) Name of the soldiers who have only work products
-select S.SoldierId,
-       S.sfName,
-       s.slName
-from Soldiers S
-left outer join Lending L on S.SoldierId = L.SoldierId
-left outer join Equipment E on E.Id = L.EquipmentId
-where L.DateOfReturn is null and E.worker is TRUE
+select SoldierId, sfName, slName
+from "work_soldiers_equipment"
 except
-select S.SoldierId,
-       S.sfName,
-       s.slName
-from Soldiers S
-left outer join Lending L2 on S.SoldierId = L2.SoldierId
-left outer join Equipment E2 on E2.Id = L2.EquipmentId
-where L2.DateOfReturn is null and E2.worker is FALSE;
+select SoldierId, sfName, slName
+from "dwork-sol-equipment"
+group by SoldierId, sfName, slName;
 
 
 -- (8) Select a list of all the products that doesn't work
@@ -90,21 +76,9 @@ left join Equipment E on E.Id = L.EquipmentId
 where L.EquipmentId == E.Id and E.worker == FALSE;
 
 
-----------------------------------------------------------
-
 -- (10) select a list of all building,
 -- and the cost of the equipment that the soldiers who live in this building are lent
 -- (for the building safety)
-select bid,
-       sum (cost)
-from Buildings B
-left outer join Rooms R on B.bid = R.buildingId
-left outer join Soldiers S on R.rid = S.roomId
-left outer join Lending L on S.soldierId = L.SoldierId
-left outer join Equipment E on L.EquipmentId = E.Id
-where L.DateOfReturn is null
-group by bid;
--- Shortly:
 select bid, sum (cost)
 from "building-equipment"
 group by bid;
@@ -118,22 +92,7 @@ having sum (E.Weight) > V.maxWight;
 
 
 -- (12) select each room that "hold" more bigger equipment than 1/4 of their size
-select  R.rid, R.size, sum(E.area)
-from Rooms R join Soldiers S on R.rid = S.roomId
-    left join Lending L on S.soldierId = L.SoldierId
-    left join Equipment E on L.EquipmentId = E.Id
-where DateOfReturn is null
-group by rid, R.size
-having sum(E.area) > R.size/4;
--- shortly:
 select  rid, size, sum(area)
-from "room-equipment"
-group by rid, size
-having sum(area) > size/4;
-
-
--- for checking
-select * , sum(area)--  rid, size, sum(area)
 from "room-equipment"
 group by rid, size
 having sum(area) > size/4;
@@ -143,8 +102,8 @@ having sum(area) > size/4;
 -- (to confirm that they really need a gun)
 select s.soldierId, s.sfName, s.sfName, D.dName, D.dDescription
 from Lending L join Equipment E on E.Id = L.EquipmentId
-    join Soldiers S on S.soldierId = L.SoldierId
-    left outer join Duties D on S.dutyId = D.did
+join Soldiers S on S.soldierId = L.SoldierId
+left outer join Duties D on S.dutyId = D.did
 where E.Name == 'gun';
 
 
@@ -160,7 +119,15 @@ select E.Id,
        E.Name,
        E.cost
 from Equipment E
-where cost = (select max(cost) from Equipment)
+where cost = (select max(cost) from Equipment);
 
 
--- (16) List of all the manufacturers that more than 40% from their products are not work
+-- (16) List of all manufacturers that have an equipment,
+-- that are exist right now in one of the rooms
+select M.Id,
+       M.Name,
+       count(M.Id)
+from Manufacturer M
+left join Equipment E on M.Id = E.ManufacturerId
+where roomId is not null
+group by M.Id, M.Name;

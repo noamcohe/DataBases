@@ -10,16 +10,16 @@ create table Vehicles
     maxWight     integer
 );
 
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (582, 'רכב נוסעים', 'מיצובישי אטראז', 261, 'רכב של מפקד הבסיס', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (432, 'רכב נוסעים', 'מיצובישי אטראז', 261, 'רכב של מפקד פלוגה', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (623, 'רכב נוסעים', 'מיצובישי אטראז', 261, 'רכב של מפקד פלוגה', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (125, 'רכב נוסעים', 'מיצובישי אטראז', 261, 'רכב חירום לנסיעה דחופה', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (435, 'טנק', 'טנק מרכבה 4', 724, 'רכב של צוות בטנק', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (132, 'טנק', 'טנק מרכבה 4', 724, 'רכב של צוות בטנק', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (443, 'טנק', 'מיצובישי אטראז', 724, 'רכב של צוות בטנק', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (913, 'טנק', 'טנק מרכבה 4', 724, 'רכב של צוות בטנק', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (901, 'גיפ', 'גיפ מבצעי', 725, 'גיפ של נסיעות מבצעיות', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (301, 'גיפ', 'גיפ מבצעי', 725, 'גיפ של נסיעות מבצעיות', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (834, 'גיפ', 'גיפ נוסעים', 725, 'גיפ של נסיעות שאינם מבצעיות', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (835, 'מטוס', 'מטוס קל', 726, 'מטוס סיור', null);
-INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (836, 'מסוק', 'מסוק פינוי', 727, 'מסוק חירום של המרפאה', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (582, 'Passenger car', 'Mitsubishi', 261, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (432, 'Passenger car', 'Mitsubishi', 261, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (623, 'Passenger car', 'Mitsubishi', 261, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (125, 'Passenger car', 'Mitsubishi', 261, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (435, 'tank', 'Chariot Tank 4', 724, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (132, 'tank', 'Chariot Tank 4', 724, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (443, 'tank', 'Mitsubishi', 724, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (913, 'tank', 'Chariot Tank 4', 724, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (901, 'jeep', 'Operational Jeep', 725, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (301, 'jeep', 'Operational Jeep', 725, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (834, 'jeep', 'Jeep passengers', 725, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (835, 'plane', 'Easy plane', 726, '', null);
+INSERT INTO Vehicles (vid, vType, vModel, buildingId, vDescription, maxWight) VALUES (836, 'helicopter', 'Evacuation helicopter', 727, '', null);
